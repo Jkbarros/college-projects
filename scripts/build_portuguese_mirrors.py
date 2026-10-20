@@ -3,7 +3,7 @@
 Mirror course repos under ../College Projects PT/ with Portuguese markdown.
 
 Copies full tree (no .git). Translates *.md; preserves ``` fences and inline `code`.
-Keeps English in *.md.en.bak. Use --resume to continue without deleting the mirror.
+Use --resume to continue without deleting the mirror. Completion markers: *.md.pt.done
 
   pip install deep-translator
   python scripts/build_portuguese_mirrors.py --resume
@@ -155,7 +155,7 @@ def mirror_repo(name: str, resume: bool, force: bool) -> None:
             "# Versão em português (PT-BR)\n\n"
             "Este diretório é um **espelho** do repositório em inglês, com arquivos "
             "`*.md` traduzidos automaticamente. Código, scripts e `archive/` permanecem "
-            "iguais. O original em inglês está em `*.md.en.bak` quando gerado.\n\n"
+            "iguais. Exportações traduzidas em `docs/canvas-pt/`.\n\n"
             f"**Origem:** `{name}`\n",
             encoding="utf-8",
         )
@@ -164,15 +164,13 @@ def mirror_repo(name: str, resume: bool, force: bool) -> None:
     for md in md_files:
         if md.name == "LEIA-ME.md":
             continue
-        bak = md.with_suffix(md.suffix + ".en.bak")
-        if resume and bak.exists() and not force:
-            if md.read_text(encoding="utf-8") != bak.read_text(encoding="utf-8"):
-                continue
+        done = md.with_suffix(".md.pt.done")
+        if resume and done.exists() and not force:
+            continue
         original = md.read_text(encoding="utf-8")
-        if not bak.exists() or force:
-            bak.write_text(original, encoding="utf-8")
         try:
             md.write_text(translate_markdown(original), encoding="utf-8")
+            done.write_text("ok", encoding="utf-8")
         except Exception as exc:
             log(f"  WARN {md.relative_to(dest)}: {exc}")
         log(f"  ok {md.relative_to(dest)}")
@@ -186,9 +184,6 @@ def build_index_readme(resume: bool, force: bool) -> None:
     if not src_readme.exists():
         return
     en = src_readme.read_text(encoding="utf-8")
-    bak = dest_readme.with_suffix(".md.en.bak")
-    if not bak.exists() or force:
-        bak.write_text(en, encoding="utf-8")
     if not resume or force or not dest_readme.exists():
         header = (
             "# Projetos universitários — EMU (português)\n\n"
