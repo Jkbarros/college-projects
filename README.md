@@ -1,6 +1,6 @@
 # College Projects — Eastern Michigan University
 
-Index of **undergraduate coursework** repositories (computer science, engineering technology, and information assurance, ≈2019–2024).  
+Index of **undergraduate coursework** repositories (computer science, engineering technology, and information assurance, 2019–2024).  
 Each course is a **separate GitHub repo** with its own README, docs, and Canvas exports in `archive/`.
 
 **Author:** [Julio Barros](https://github.com/Jkbarros)
@@ -34,38 +34,54 @@ Each course is a **separate GitHub repo** with its own README, docs, and Canvas 
 
 ```mermaid
 flowchart TB
-  subgraph engtech [Engineering technology]
-    CET151[CET 151]
+  subgraph engtech["Engineering technology"]
+    cet151["CET 151"]
   end
-  subgraph cs [Computer science]
-    C111[COSC 111]
-    C381[COSC 381]
-    C314[COSC 314]
+  subgraph cs["Computer science"]
+    c111["COSC 111"]
+    c381["COSC 381"]
+    c314["COSC 314"]
   end
-  subgraph sec [Information assurance]
-    IA103[IA 103]
-    IA244[IA 244]
-    IA329[IA 329]
-    IA385[IA 385]
-    IA403[IA 403]
-    IA445[IA 445]
-    IA447[IA 447]
-    IA455[IA 455]
-    CCI[Cyber crime investigation]
+  subgraph sec["Information assurance"]
+    ia103["IA 103"]
+    ia244["IA 244"]
+    ia329["IA 329"]
+    ia385["IA 385"]
+    ia403["IA 403"]
+    ia445["IA 445"]
+    ia447["IA 447"]
+    ia455["IA 455"]
+    cci["Cyber crime investigation"]
   end
-  CET151 --> C111
-  C381 --> C314
-  C111 --> C314
-  C314 --> IA103
-  IA103 --> IA244
-  IA103 --> IA329
-  IA103 --> IA385
-  IA103 --> IA403
-  IA103 --> IA445
-  IA447 --> IA455
-  IA403 --> IA445
-  CCI --> IA445
+  cet151 --> c111
+  c381 --> c314
+  c111 --> c314
+  c314 --> ia103
+  ia103 --> ia244
+  ia103 --> ia329
+  ia103 --> ia385
+  ia103 --> ia403
+  ia103 --> ia445
+  ia447 --> ia455
+  ia403 --> ia445
+  cci --> ia445
 ```
+
+## Portuguese mirrors (local)
+
+Automated PT-BR copies of each course folder live next to this workspace:
+
+`../College Projects PT/<Course name> (PT)/`
+
+Regenerate with:
+
+```bash
+pip install -r scripts/requirements-pt-mirror.txt
+python scripts/build_portuguese_mirrors.py --resume
+python scripts/pt_mirror_extras.py
+```
+
+Each mirror includes `LEIA-ME.md`, translated `*.md`, `docs/canvas-pt/` (translated Canvas exports), and Portuguese `docs/demo.gif`. Code and binary `archive/` are unchanged.
 
 ## Layout (every course repo)
 
