@@ -1,6 +1,6 @@
 # College Projects — Eastern Michigan University
 
-Index of **undergraduate coursework** repositories (computer science, engineering technology, and information assurance, ≈2022–2024).  
+Index of **undergraduate coursework** repositories (computer science, engineering technology, and information assurance, ≈2019–2024).  
 Each course is a **separate GitHub repo** with its own README, docs, and Canvas exports in `archive/`.
 
 **Author:** [Julio Barros](https://github.com/Jkbarros)
